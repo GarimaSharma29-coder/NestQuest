@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Registration Form</title>
+    <style>
+        body {
+            background-color: white;
+        }
+        h2 {
+            text-align: center;
+            color: blue;
+            font-size: 1.5em;
+            font-family: Arial, sans-serif;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: black;
+        }
+        .required {
+            color: red;
+        }
+        input[type="text"], input[type="password"], textarea {
+            padding: 5px;
+            border: 1px solid #ccc;
+            width: 200px;
+            margin-bottom: 10px;
+        }
+        .error {
+            color: red;
+            font-size: 0.8em;
+            margin-bottom: 5px;
+        }
+        input[type="radio"] {
+            margin-right: 5px;
+        }
+        a {
+            text-decoration: none;
+            color: blue;
+        }
+    </style>
+</head>
+<center>
+<body>
+    <center>
+        <h2>Registration Form</h2>
+    </center>
+    <form method="post" action="registration.php">
+        <label for="firstname">First Name <span class="required">*</span></label>
+        <input type="text" name="firstname" id="firstname" required>
+        <span class="error" id="firstnameError"></span><br />
+
+        <label for="lastname">Last Name <span class="required">*</span></label>
+        <input type="text" name="lastname" id="lastname" required>
+        <span class="error" id="lastnameError"></span><br />
+
+        <label for="email">Email Address <span class="required">*</span></label>
+        <input type="email" name="email" id="email" required>
+        <span class="error" id="emailError"></span><br />
+
+        <label for="pass">Password (Minimum 6 characters) <span class="required">*</span></label>
+        <input type="password" name="pass" id="pass" minlength="8" required>
+        <span class="error" id="passwordError">
+            <script>
+                function validatePassword() {
+                  var password = document.getElementById("pass").value;
+                  var passwordError = document.getElementById("passwordError");
+                
+                  passwordError.innerHTML = ""; // Clear any previous error message
+                
+                  if (password === "") {
+                    passwordError.innerHTML = "Password is required.";
+                    return false; // Prevent form submission if password is empty
+                  } else if (password.length < 8) {
+                    passwordError.innerHTML = "Password must be at least 8 characters long.";
+                    return false;
+                  } else if (!/[a-z]/.test(password) || !/[A-Z]/.test(password) || !/\d/.test(password)) {
+                    passwordError.innerHTML = "Password must contain at least one uppercase letter, one lowercase letter, and one number.";
+                    return false;
+                  }
+                
+                  // Password is valid, return true to allow form submission
+                  return true;
+                }
+                </script>
+        </span><br />
+
+        <label for="addr">Address <span class="required">*</span></label>
+        <textarea rows="4" cols="30" name="addr" id="addr" required></textarea>
+        <span class="error" id="addressError"></span><br />
+
+        <label for="mobileno">Mobile No <span class="required">*</span></label>
+        <input type="text" name="mobileno" id="mobileno" required>
+        <span class="error" id="mobileNoError"></span><br />
+
+        <label>Gender</label>
+        <input type="radio" name="gender" value="male"> Male
+        <input type="radio" name="gender" value="female"> Female
+        <input type="radio" name="gender" value="none"> None
+        <span class="error" id="genderError"></span><br /><br />
+
+        Already a member? <a href="registration.php">Login Here</a>
+        <br><br>
+
+        <input type="submit" value="Submit">
+        <input type="reset" value="Reset">
+    </form>
+    </body>
+</center>
+</html>
